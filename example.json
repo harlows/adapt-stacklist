@@ -1,10 +1,10 @@
 {
     "_type": "component",
-    "_component": "stacklist",
+    "_component": "txtmessages",
     "_classes": "",
     "_layout": "full",
-    "title": "Stacklist",
-    "displayTitle": "Stacklist",
+    "title": "TxtMessages",
+    "displayTitle": "Txt Messages",
     "body": "",
 	"_button": {
 		"startText": "Let's get started",
