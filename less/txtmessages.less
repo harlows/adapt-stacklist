@@ -1,0 +1,75 @@
+.txtmessages-widget {
+    position: relative;
+
+    .txtmessages-phone-bg {
+        position: relative;
+        text-align: center;
+        width: 100%;
+    }
+
+    .txtmessages-items {
+        position: absolute;
+        top: 0px;
+        width: 100%;
+        margin-bottom: -@item-margin;
+        height: 0;
+        -webkit-transition: 0.2s;
+        -moz-transition: 0.2s;
+        -ms-transition: 0.2s;
+        -o-transition: 0.2s;
+        transition: 0.2s;
+
+        .txtmessages-items-inner {
+            padding-top: 60px;
+        }
+
+        .txtmessages-item {
+            position: relative;
+            padding: 5px 15px;
+            box-shadow: 8px 8px 3px rgba(0, 0, 0, 0.1);
+            background-color: @primary-color;
+            color: @primary-color-inverted;
+            border-radius: 10px;
+            width: 80%;
+            margin: 0px auto;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+
+            &.show {
+                position: static !important;
+            }
+
+            &.right-message {
+                margin-right: 0px;
+                background-color: @blue;
+            }
+
+            &.left-message {
+                margin-left: 0px;
+                background-color: @green;
+            }
+
+            .txtmessages-item-graphic {
+                float: left;
+                margin-right: 10px;
+                padding: 0px;
+                img {
+                    display: block;
+                }
+            }
+        }
+    }
+    .txtmessages-button {
+        display: none;
+        position: absolute;
+        top: 100px;
+        height: 53px;
+        width: 100%;
+        text-align: center;
+
+        button {
+            width: 70%;
+        }
+    }
+}
