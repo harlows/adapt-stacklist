@@ -3,21 +3,22 @@ define(function(require) {
 	var ComponentView = require('coreViews/componentView');
 	var Adapt = require('coreJS/adapt');
 
-	var StackList = ComponentView.extend({
+	var TxtMessages = ComponentView.extend({
 
 	    TRANSITION_TIME: 250,
 
 		events: {
-			"click .stacklist-next": "nextItem"
+			"click .txtmessages-next": "nextItem"
 		},
 
 		preRender: function() {
 			this.model.set("_stage", -1);
 			this.setupButton();
+			this.listenTo(Adapt, "device:resize", this.setupListItems);
 		},
 
 		postRender: function() {
-	    	if (!this.model.get("_isComplete") || this.model.get("_isResetOnRevisit")) this.setupListItems();
+			if (!this.model.get("_isComplete") || this.model.get("_isResetOnRevisit")) this.setupListItems();
 			this.setReadyStatus();
 		},
 
@@ -33,11 +34,9 @@ define(function(require) {
 		setupListItems: function() {
 
 			// Set item positions alternating R and L
-            var wWin = $(window).width();
-            var $items = this.$(".stacklist-item");
-
-            $items.addClass("visibility-hidden");
-
+            this.$(".txtmessages-items").height(this.$(".txtmessages-items-inner").height());
+			var $items = this.$(".txtmessages-item");
+			var wWin = $(window).width();
 			$items.each(function(i) {
 				var $el = $items.eq(i);
 				var even = i % 2 === 0;
@@ -45,8 +44,12 @@ define(function(require) {
 				offset.left = even ? - ($el.outerWidth() + 10) : wWin + 10;
 				$el.offset(offset);
 			});
-			this.$(".stacklist-button").show();
+			this.$(".txtmessages-button").show();
 		},
+
+        setupListHeight: function() {
+
+        },
 
 		nextItem: function() {
 			var stage = this.model.get("_stage") + 1;
@@ -60,14 +63,14 @@ define(function(require) {
 			var isComplete = this.model.get("_items").length - 1 === stage;
 
 			if (!isComplete) {
-                this.$(".stacklist-next").html(continueText);
+                this.$(".txtmessages-next").html(continueText);
             }
 
-			var $item = this.$(".stacklist-item").eq(stage);
+			var $item = this.$(".txtmessages-item").eq(stage);
             $item.removeClass("visibility-hidden");
 			var h = $item.outerHeight(true);
 
-			this.$(".stacklist-button").velocity({top: "+=" + h}, this.TRANSITION_TIME);
+			this.$(".txtmessages-button").velocity({top: "+=" + h}, this.TRANSITION_TIME);
 
 			$item.velocity({left: 0}, {
 			    delay: this.TRANSITION_TIME,
@@ -83,7 +86,8 @@ define(function(require) {
 		},
 
 		onComplete: function () {
-			var $button = this.$(".stacklist-button");
+
+			var $button = this.$(".txtmessages-button");
 			$button.velocity({opacity: 0}, {
 			    duration: this.TRANSITION_TIME,
                 queue: false,
@@ -96,8 +100,8 @@ define(function(require) {
 		}
 	});
 
-	Adapt.register('stacklist', StackList);
+	Adapt.register('txtmessages', TxtMessages);
 
-	return StackList;
+	return TxtMessages;
 
 });
