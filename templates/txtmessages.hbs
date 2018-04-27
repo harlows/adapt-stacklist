@@ -1,0 +1,29 @@
+<div class="txtmessages-inner component-inner" role="region" aria-label="{{_globals._components._text.ariaRegion}}">
+    {{> component this}}
+
+    <div class="txtmessages-widget component-widget">
+        {{#if _phoneGraphic}} {{#if _phoneGraphic.src}}
+        <div class="txtmessages-phone-bg">
+            <img src="{{_phoneGraphic.src}}" aria-label="{{_phoneGraphic.alt}}" tabindex="0">
+        </div>
+        {{/if}} {{/if}}
+        <div class="txtmessages-items">
+            <div class="txtmessages-items-inner">
+                {{#each _items}}
+                <div class="txtmessages-item visibility-hidden  {{_classes}}">
+                    {{#if _graphic}} {{#if _graphic.src}}
+                    <div class="txtmessages-item-graphic">
+                        <img src="{{_graphic.src}}" aria-label="{{_graphic.alt}}" tabindex="0">
+                    </div>
+                    {{/if}} {{/if}} {{#if this.length}} {{{a11y_text this}}} {{else}} {{{a11y_text body}}} {{/if}}
+                </div>
+                {{/each}}
+                <div class="txtmessages-button">
+                    <button class="txtmessages-next" aria-label="{{_globals._accessibility._ariaLabels.next}}" role="button">
+                        {{{_button.startText}}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
